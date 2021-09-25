@@ -3,7 +3,6 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Bungee', cursive;
     background-image: url('https://images.unsplash.com/photo-1483921020237-2ff51e8e4b22?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=870&q=80');
     background-size: cover;
     background-position: center;
@@ -19,9 +18,9 @@ body {
 }
 
 .content {
-    background-color: rgba(255, 255, 255, .7);
+    background-color: rgba(255, 255, 255, .75);
     box-shadow: 0 0 6px 2px #cccccc;
-    padding: 1.7rem;
+    padding: 1.8rem;
     border-radius: .6rem;
     text-align: center;
     padding-top: 0;
@@ -30,8 +29,10 @@ body {
 .content .clock {
     font-size: 3.3rem;
     font-family: 'Bungee Shade', cursive;
+    display: flex;
 }
 
+.content .clock span:not(:last-child) { margin-right: 1rem; }
 .content p { margin: 0; }
 
 .content .datetime {
@@ -45,4 +46,20 @@ body {
 .content .greetings {
     font-family: 'Poppins', sans-serif;
     font-size: 1.15rem;
+}
+
+/* responsive */
+@media(max-width: 490px) {
+    .content { padding-bottom: 2rem; }
+
+    .content .clock { 
+        flex-direction: column;
+        font-size: 2.6rem;
+    }
+
+    .content .clock span { margin-right: 0!important; }
+    .content .clock span:not(:first-child) { margin-top: -3rem; }
+
+    .content .datetime { margin-top: 0; }
+    .clock .separator { transform: rotate(90deg); }
 }
