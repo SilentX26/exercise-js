@@ -32,6 +32,7 @@ body {
     display: flex;
 }
 
+.content .clock span { display: block; }
 .content .clock span:not(:last-child) { margin-right: 1rem; }
 .content p { margin: 0; }
 
@@ -58,7 +59,7 @@ body {
     }
 
     .content .clock span { margin-right: 0!important; }
-    .content .clock span:not(:first-child) { margin-top: -3rem; }
+    /* .content .clock span:not(:first-child) { margin-top: -3rem; } */
 
     .content .datetime { margin-top: 0; }
     .clock .separator { transform: rotate(90deg); }
