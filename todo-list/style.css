@@ -1,0 +1,125 @@
+@import url('https://fonts;.googleapis.com/css2?family=Noto+Sans+Display:wght@100;400&display=swap');
+* { box-sizing: border-box; }
+.text-center { text-align: center; }
+
+body {
+    font-family: 'Noto Sans Display', sans-serif!important;
+    margin: 0;
+    background-image: linear-gradient(#0087FF, #4EABFE);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+
+.container {
+    width: 40%;
+    margin: auto;
+    margin-top: 4.5rem;
+}
+
+.title {
+    color: white;
+    font-weight: 200;
+    letter-spacing: 3px;
+    margin-bottom: 0;
+}
+
+.copyright {
+    color: #fafafa;
+    margin-top: .8rem;
+    font-style: italic;
+    font-size: .9rem;
+}
+
+.card {
+    width: 100%;
+    background-color: white;
+    display: flex;
+    margin-top: 2.6rem;
+    padding: 11px 16px;
+    border-radius: .2rem;
+    border-bottom: 2px solid #706e6e;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card i {
+    color: #00adff;
+}
+
+.card .input {
+    width: 85%;
+    font-size: .85rem;
+    border: none;
+    caret-color: #008eff;
+    color: #565151;
+}
+
+.card .input:focus-visible {
+    outline: none;
+}
+
+.card .prepand-right i:not(.show) {
+    display: none;
+}
+
+.card.card-todo {
+    margin-top: 2rem;
+    display: block;
+    padding: 0;
+    color: #0095ff;
+}
+
+.card.card-todo .todo {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.card.card-todo .todo .todo-items {
+    font-size: .9rem;
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 14px;
+}
+
+.card.card-todo .todo .todo-items:not(:first-child) {
+    border-top: 1.5px solid #dfdfdf;
+}
+
+.card.card-todo .todo .todo-items .todo-text {
+    width: 80%;
+}
+
+.card.card-todo .todo .todo-items .todo-action .text-danger {
+    color: #ff5959;
+}
+
+.card.card-todo .todo .todo-items.checked {
+    background-color: #8dffc3;
+}
+
+.card.card-todo .todo .todo-items.loading {
+    display: block;
+    text-align: center;
+}
+
+
+/* responsive */
+@media(min-width: 768px) and (max-width: 992px) {
+    .container {
+        width: 50%;
+    }
+}
+
+@media(max-width: 768px) {
+    .container {
+        width: 70%;
+    }
+}
+
+@media(max-width: 569px) {
+    .container {
+        width: 75%;
+    }
+}
