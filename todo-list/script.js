@@ -53,22 +53,25 @@ const refreshTodo = () => {
         for(const data of objData) {
             let checked = '';
             let icon = '';
+            let title = '';
 
             if(data.checked) {
                 checked = 'checked';
                 icon = 'check-double';
+                title = 'Todo sudah selesai';
             } else {
                 checked = '';
                 icon = 'check';
+                title = 'Selesaikan todo';
             }
 
             todoSrc += `
                 <li class="todo-items ${checked}">
-                    <a href="javascript:checkTodo('${data.id}');" class="todo-action">
+                    <a href="javascript:checkTodo('${data.id}');" class="todo-action" title="${title}">
                         <i class="fas fa-${icon} todo-icon"></i>
                     </a>
                     <span class="todo-text">${data.text}</span>
-                    <a href="javascript:deleteTodo('${data.id}');" class="todo-action">
+                    <a href="javascript:deleteTodo('${data.id}');" class="todo-action" title="Hapus todo">
                         <i class="fas fa-times text-danger"></i>
                     </a>
                 </li>
