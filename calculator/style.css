@@ -44,14 +44,6 @@ body {
     margin-bottom: 1rem;
 }
 
-.row:last-child .item {
-    width: 33.3%;
-}
-
-.row .item.operasi {
-    width: 20%;
-}
-
 .row .item {
     background-color: white;
     width: 20%;
@@ -61,6 +53,15 @@ body {
     cursor: pointer;
     transition: .1s all;
     font-weight: bold;
+    user-select: none;
+}
+
+.row:nth-child(4) .item:not(:last-child) {
+    width: 33.3%;
+}
+
+.row:last-child .item {
+    width: 45%;
 }
 
 .row .item:hover {
