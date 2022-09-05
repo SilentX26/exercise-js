@@ -18,6 +18,11 @@
                     <div class="card-body">
                         <textarea id="input-data" rows="10" class="form-control" placeholder="Masukkan data, pisahkan dengan tanda koma (,)"></textarea>
 
+                        <div class="mt-3">
+                            <label class="mb-1 fw-bold">Panjang Kelas</label>
+                            <input type="text" id="panjang-kelas" class="form-control" placeholder="Panjang Kelas" value="5">
+                        </div>
+
                         <div class="mt-4 d-flex justify-content-end">
                             <button type="button" class="btn btn-success px-4" onclick="proses();">Submit</button>
                         </div>
@@ -38,6 +43,26 @@
                                     </tr>
                                 </thead>
                                 <tbody id="daftar-distribusi-frekuensi"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mt-5 shadow">
+                    <div class="card-header"><h4 class="card-title mb-0">Daftar Tabel Kelas</h4></div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered text-center">
+                                <thead class="table-secondary">
+                                    <tr>
+                                        <th>Kelas</th>
+                                        <th>Batas Kelas</th>
+                                        <th>Frekuensi</th>
+                                        <th>Frekuensi Kumulatif (<=)</th>
+                                        <th>Frekuensi Kumulatif (>=)</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="daftar-kelas"></tbody>
                             </table>
                         </div>
                     </div>
@@ -75,6 +100,11 @@
                             <div class="col-md-4 col-6 mb-4">
                                 <span class="badge badge-pills bg-warning fw-bold mb-1">Jangkauan</span>
                                 <small class="mb-0 d-block" id="hasil-jangkauan"></small>
+                            </div>
+
+                            <div class="col-md-4 col-6 mb-4">
+                                <span class="badge badge-pills bg-dark fw-bold mb-1">Banyak Kelas</span>
+                                <small class="mb-0 d-block" id="hasil-banyak-kelas"></small>
                             </div>
                         </div>
                     </div>
@@ -214,6 +244,59 @@
         return hasil;
     }
 
+    function banyakKelas(min, max) {
+        const j = jangkauan(min, max), pj = parseInt( $('#panjang-kelas').val() );
+        const hasil = Math.round( jangkauan(min, max) / pj );
+
+        $('#hasil-banyak-kelas').html( `Jangkauan / Panjang Kelas <br>= ${j} / ${pj} =${hasil}` );
+        return hasil;
+    }
+
+    function daftarKelas(min, max, arrData) {
+        const bnykK = banyakKelas(min, max);
+        $('#daftar-kelas').html('');
+        let tmpFrekuensi = 0, arrFrekuensi = [], frekuensiK, j=0;
+
+        for(let i=min; i <= max; i += bnykK) {
+            if(i == max) {
+                frekuensiK = tmpFrekuensi;
+
+            } else {
+                const batasBawah = i + 1;
+                const batasAtas = i + bnykK;
+                let frekuensi = 0;
+
+                arrData.forEach( function(v) {
+                    if(v >= batasBawah && v <= batasAtas) {
+                        frekuensi++;
+                    }
+                });
+
+                $('#daftar-kelas').append(`
+                    <tr>
+                        <td>${batasBawah} - ${batasAtas}</td>
+                        <td>${batasBawah - 0.5} - ${batasAtas + 0.5}</td>
+                        <td>${frekuensi}</td>
+                        <td>${ tmpFrekuensi + frekuensi }</td>
+                        <td id="fk2-${j}"></td>
+                    </tr>
+                `);
+
+                tmpFrekuensi += frekuensi;
+                arrFrekuensi.push(frekuensi);
+                j++;
+            }
+        }
+
+        let tmpFrekuensiK2 = frekuensiK, k=0;
+        arrFrekuensi.forEach( function(v, i) {
+            tmpFrekuensiK2 -= (arrFrekuensi[ i - 1 ] ?? 0);
+            $(`#daftar-kelas #fk2-${k}`).text(tmpFrekuensiK2);
+
+            k++;
+        });
+    }
+
     function proses() {
         const data = $('#input-data').val();
         if( !data ) {
@@ -229,6 +312,8 @@
         rataRata(dataDistribusi.SumXn, dataDistribusi.n);
         modus(dataDistribusi.frekuensi, dataDistribusi.nilai);
         median(dataDistribusi);
+
+        daftarKelas(min, max, arrData);
     }
     </script>
 </body>
