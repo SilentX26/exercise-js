@@ -121,14 +121,14 @@
         let hasil = arrData.sort( (a, b) => a - b ) [0];
 
         $('#hasil-data-terkecil').text(hasil);
-        return hasil;
+        return parseInt(hasil);
     }
 
     function dataTerbesar(arrData) {
         let hasil = arrData.sort( (a, b) => b - a ) [0];
 
         $('#hasil-data-terbesar').text(hasil);
-        return hasil;
+        return parseInt(hasil);
     }
 
     function jangkauan(min, max) {
@@ -255,11 +255,12 @@
     function daftarKelas(min, max, arrData) {
         const bnykK = banyakKelas(min, max);
         $('#daftar-kelas').html('');
-        let tmpFrekuensi = 0, arrFrekuensi = [], frekuensiK, j=0;
+        let tmpFrekuensi = 0, arrFrekuensi = [], frekuensiK, j=0, i=min;
 
-        for(let i=min; i <= max; i += bnykK) {
-            if(i == max) {
+        while(true) {
+            if(i >= max) {
                 frekuensiK = tmpFrekuensi;
+                break;
 
             } else {
                 const batasBawah = i + 1;
@@ -286,6 +287,8 @@
                 arrFrekuensi.push(frekuensi);
                 j++;
             }
+
+            i += bnykK;
         }
 
         let tmpFrekuensiK2 = frekuensiK, k=0;
